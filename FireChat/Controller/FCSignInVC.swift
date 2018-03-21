@@ -57,16 +57,27 @@ class FCSignInVC: UIViewController {
 
     
     @IBAction func signUpButtonPressed(_ sender: UIButton) {
-        
+        alertTheUser(title: "Hi", message: "test alert")
     }
     
     
     private func alertTheUser(title: String, message: String) {
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(ok)
-        present(alert, animated: true, completion: nil)
+//        let alert = KLCPopup.init(contentView: nil, showType: .bounceInFromRight, dismissType: .bounceOutToBottom, maskType: .dimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: false)
+//
+//        alert?.show()
+        
+        let alert = NYAlertViewController.alert(withTitle: title, message: message)
+        alert?.backgroundTapDismissalGestureEnabled = true
+        let ok = NYAlertAction(title: "OK", style: .default, handler: nil)
+        alert?.addAction(ok)
+        present(alert!, animated: true, completion: nil)
+        
+        
+      //  let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+       // let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+       // alert.addAction(ok)
+       // present(alert, animated: true, completion: nil)
     }
     
     
