@@ -16,6 +16,7 @@
 		EEAF6399206059E50046F135 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEAF6397206059E50046F135 /* LaunchScreen.storyboard */; };
 		EEAF63AA206064E00046F135 /* FCContactsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAF63A9206064E00046F135 /* FCContactsVC.swift */; };
 		EEAF63AC206064F90046F135 /* FCSignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAF63AB206064F90046F135 /* FCSignInVC.swift */; };
+		EED7F9FF206317C1009E0DB8 /* KLCPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = EED7F9FD206317C1009E0DB8 /* KLCPopup.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,9 @@
 		EEAF639A206059E50046F135 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEAF63A9206064E00046F135 /* FCContactsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCContactsVC.swift; sourceTree = "<group>"; };
 		EEAF63AB206064F90046F135 /* FCSignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCSignInVC.swift; sourceTree = "<group>"; };
+		EED7F9FC206317C0009E0DB8 /* FireChat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FireChat-Bridging-Header.h"; sourceTree = "<group>"; };
+		EED7F9FD206317C1009E0DB8 /* KLCPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLCPopup.m; sourceTree = "<group>"; };
+		EED7F9FE206317C1009E0DB8 /* KLCPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLCPopup.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				EEAF638D206059E50046F135 /* FireChat */,
+				EEB67B7B20630FB70008733C /* Libraries */,
 				EEAF63A020605F440046F135 /* Supporting */,
 				EEAF638C206059E50046F135 /* Products */,
 				1DA23D18079A709B009072BB /* Pods */,
@@ -114,6 +119,7 @@
 		EEAF63A020605F440046F135 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
+				EED7F9FC206317C0009E0DB8 /* FireChat-Bridging-Header.h */,
 				EEAF6397206059E50046F135 /* LaunchScreen.storyboard */,
 				EEAF639A206059E50046F135 /* Info.plist */,
 				EE1714662061B5B700C84DD6 /* GoogleService-Info.plist */,
@@ -153,6 +159,23 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		EEB67B7B20630FB70008733C /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				EEB67B9E2063150B0008733C /* KLCPopup */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		EEB67B9E2063150B0008733C /* KLCPopup */ = {
+			isa = PBXGroup;
+			children = (
+				EED7F9FE206317C1009E0DB8 /* KLCPopup.h */,
+				EED7F9FD206317C1009E0DB8 /* KLCPopup.m */,
+			);
+			path = KLCPopup;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -189,6 +212,7 @@
 				TargetAttributes = {
 					EEAF638A206059E50046F135 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -291,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE17146B2061D0F800C84DD6 /* FCFirebaseAuthService.swift in Sources */,
+				EED7F9FF206317C1009E0DB8 /* KLCPopup.m in Sources */,
 				EEAF638F206059E50046F135 /* AppDelegate.swift in Sources */,
 				EEAF63AC206064F90046F135 /* FCSignInVC.swift in Sources */,
 				EEAF63AA206064E00046F135 /* FCContactsVC.swift in Sources */,
@@ -372,6 +397,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Supporting/$(PROJECT_NAME)-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -421,6 +447,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Supporting/$(PROJECT_NAME)-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -431,12 +458,15 @@
 			baseConfigurationReference = 4961E299F31FB6E95A32F753 /* Pods-FireChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 68G4LPYNS6;
 				INFOPLIST_FILE = "$(SRCROOT)/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tany.FireChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Supporting/$(PROJECT_NAME)-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -447,12 +477,14 @@
 			baseConfigurationReference = DB515A6DD1129DE0747749F4 /* Pods-FireChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 68G4LPYNS6;
 				INFOPLIST_FILE = "$(SRCROOT)/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tany.FireChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Supporting/$(PROJECT_NAME)-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
