@@ -12,6 +12,7 @@ import UIKit
 class FCSignInVC: UIViewController {
 
     private let CONTACTS_SEGUE = "ContactsSegue"
+    private let HUD_DURATION = 3.1
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -24,11 +25,18 @@ class FCSignInVC: UIViewController {
         return passwordTextField.text
     }
     
+    let loginHud = LottieHUD("anubis")//("veil")
+    let signUpHud = LottieHUD("acrobatics")
+    
     //MARK: - Life Circle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        #if DEBUG
+            self.emailTextField.text = "tany@tany.com"
+            self.passwordTextField.text = "111111"
+        #endif
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -42,6 +50,8 @@ class FCSignInVC: UIViewController {
     
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         
+        loginHud.showHUD()
+        
         if isValidEmail(testStr: email) && password != "" {
             
             FCFirebaseAuthService.sharedInstance.login(withEmail: email!, password: password!, loginHandler: { [weak self] (message) in
@@ -53,19 +63,22 @@ class FCSignInVC: UIViewController {
                 } else {
                     
                     self?.clearTextFields()
+                    self?.dismissHUD()
                     self?.performSegue(withIdentifier: (self?.CONTACTS_SEGUE)!, sender: nil)
                 }
             })
         
         } else {
             
-            alertTheUser(title: "🙀\nЧто-то не так", message: "Введи реальный @mail и пароль")
+            perform(#selector(cantLogin), with: nil, afterDelay: TimeInterval(HUD_DURATION))
         }
         
     }
 
     
     @IBAction func signUpButtonPressed(_ sender: UIButton) {
+        
+        signUpHud.showHUD()
         
         if isValidEmail(testStr: email) && password != "" {
             
@@ -78,24 +91,38 @@ class FCSignInVC: UIViewController {
                 } else {
                     
                     self?.clearTextFields()
+                    self?.dismissHUD()
                     self?.performSegue(withIdentifier: (self?.CONTACTS_SEGUE)!, sender: nil)
                 }
             })
             
         } else {
             
-            alertTheUser(title: "😾\nЧто-то не так", message: "Введи реальный @mail и пароль")
+            perform(#selector(cantSignIn), with: nil, afterDelay: TimeInterval(HUD_DURATION))
+            
         }
     }
     
+
+    @objc private func cantLogin() {
+        
+        alertTheUser(title: "🙀\nЧто-то не так", message: "Введи реальный @mail и пароль")
+    }
+    
+    @objc private func cantSignIn() {
+        
+        alertTheUser(title: "😾\nЧто-то не так", message: "Введи реальный @mail и пароль")
+    }
     
     private func alertTheUser(title: String, message: String) {
+        
+        dismissHUD()
         
         let alert = NYAlertViewController.alert(withTitle: title, message: "\n\(message)\n")
         alert?.backgroundTapDismissalGestureEnabled = true
         alert?.transitionStyle = .slideFromRight
         alert?.buttonColor = UIColor.red;
-        
+
         let ok = NYAlertAction(title: "OK", style: .default, handler: { [weak alert] (alertAction) in
             alert?.dismiss(animated: true, completion: nil)
         })
@@ -104,8 +131,16 @@ class FCSignInVC: UIViewController {
         
     }
     
+
+    @objc func dismissHUD() {
+
+        print("dismissHUD")
+        loginHud.stopHUD()
+        signUpHud.stopHUD()
+    }
     
-    //MARK: - Private
+    
+    //MARK: - Helpers
     
     func isValidEmail(testStr:String?) -> Bool {
         
