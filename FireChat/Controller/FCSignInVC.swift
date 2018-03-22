@@ -69,6 +69,7 @@ class FCSignInVC: UIViewController {
         
         let alert = NYAlertViewController.alert(withTitle: title, message: message)
         alert?.backgroundTapDismissalGestureEnabled = true
+        alert?.transitionStyle = .slideFromRight
         let ok = NYAlertAction(title: "OK", style: .default, handler: nil)
         alert?.addAction(ok)
         present(alert!, animated: true, completion: nil)

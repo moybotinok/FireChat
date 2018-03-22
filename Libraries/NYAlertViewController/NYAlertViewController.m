@@ -47,6 +47,7 @@
 @interface NYAlertViewPresentationAnimationController : NSObject <UIViewControllerAnimatedTransitioning>
 
 @property NYAlertViewControllerTransitionStyle transitionStyle;
+@property NYAlertViewControllerTransitionStyle dissmisStyle;
 @property CGFloat duration;
 
 @end
@@ -66,12 +67,19 @@ static CGFloat const kDefaultPresentationAnimationDuration = 0.7f;
 }
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
-    if (self.transitionStyle == NYAlertViewControllerTransitionStyleSlideFromTop || self.transitionStyle == NYAlertViewControllerTransitionStyleSlideFromBottom) {
+    if (self.transitionStyle == NYAlertViewControllerTransitionStyleSlideFromTop || self.transitionStyle == NYAlertViewControllerTransitionStyleSlideFromBottom || self.transitionStyle == NYAlertViewControllerTransitionStyleSlideFromLeft || self.transitionStyle == NYAlertViewControllerTransitionStyleSlideFromRight) {
         UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
         
         CGRect initialFrame = [transitionContext finalFrameForViewController:toViewController];
         
+        if (self.transitionStyle == NYAlertViewControllerTransitionStyleSlideFromTop || self.transitionStyle == NYAlertViewControllerTransitionStyleSlideFromBottom ) {
         initialFrame.origin.y = self.transitionStyle == NYAlertViewControllerTransitionStyleSlideFromTop ? -(initialFrame.size.height + initialFrame.origin.y) : (initialFrame.size.height + initialFrame.origin.y);
+        } else if (self.transitionStyle == NYAlertViewControllerTransitionStyleSlideFromLeft || self.transitionStyle == NYAlertViewControllerTransitionStyleSlideFromRight) {
+            initialFrame.origin.x = self.transitionStyle == NYAlertViewControllerTransitionStyleSlideFromLeft ? - (initialFrame.size.width + initialFrame.origin.x) : (initialFrame.size.width + initialFrame.origin.x);
+        }
+        
+        
+        
         toViewController.view.frame = initialFrame;
         
         [[transitionContext containerView] addSubview:toViewController.view];
@@ -81,10 +89,14 @@ static CGFloat const kDefaultPresentationAnimationDuration = 0.7f;
             CATransform3D transform = CATransform3DIdentity;
             transform.m34 = -1.0f / 600.0f;
             transform = CATransform3DRotate(transform,  M_PI_4 * 1.3f, 1.0f, 0.0f, 0.0f);
-            
-            toViewController.view.layer.zPosition = 100.0f;
-            toViewController.view.layer.transform = transform;
         }
+    
+        // поворот
+        CGRect frame = toViewController.view.frame;
+        frame.origin.y -= 200;
+        toViewController.view.frame = frame;
+        toViewController.view.transform = CGAffineTransformMakeRotation(-45);
+        
         
         [UIView animateWithDuration:[self transitionDuration:transitionContext]
                               delay:0.0f
@@ -127,6 +139,8 @@ static CGFloat const kDefaultPresentationAnimationDuration = 0.7f;
             
         case NYAlertViewControllerTransitionStyleSlideFromTop:
         case NYAlertViewControllerTransitionStyleSlideFromBottom:
+        case NYAlertViewControllerTransitionStyleSlideFromRight:
+        case NYAlertViewControllerTransitionStyleSlideFromLeft:
             return 0.6f;
     }
 }
@@ -155,7 +169,8 @@ static CGFloat const kDefaultDismissalAnimationDuration = 0.6f;
 }
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
-    if (self.transitionStyle == NYAlertViewControllerTransitionStyleSlideFromTop || self.transitionStyle == NYAlertViewControllerTransitionStyleSlideFromBottom) {
+    
+    if (self.transitionStyle == NYAlertViewControllerTransitionStyleSlideFromTop || self.transitionStyle == NYAlertViewControllerTransitionStyleSlideFromBottom ) {
         UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
         
         CGRect finalFrame = [transitionContext finalFrameForViewController:fromViewController];
@@ -193,6 +208,8 @@ static CGFloat const kDefaultDismissalAnimationDuration = 0.6f;
             
         case NYAlertViewControllerTransitionStyleSlideFromTop:
         case NYAlertViewControllerTransitionStyleSlideFromBottom:
+        case NYAlertViewControllerTransitionStyleSlideFromRight:
+        case NYAlertViewControllerTransitionStyleSlideFromLeft:
             return 0.6f;
     }}
 
@@ -523,7 +540,9 @@ static CGFloat const kDefaultDismissalAnimationDuration = 0.6f;
 
 - (void)actionButtonPressed:(UIButton *)button {
     NYAlertAction *action = self.actions[button.tag];
-    action.handler(action);
+    if (action.handler) {
+        action.handler(action);
+    }
 }
 
 #pragma mark - Getters/Setters
@@ -762,7 +781,7 @@ static CGFloat const kDefaultDismissalAnimationDuration = 0.6f;
 
 - (id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
     NYAlertViewDismissalAnimationController *dismissalAnimationController = [[NYAlertViewDismissalAnimationController alloc] init];
-    dismissalAnimationController.transitionStyle = self.transitionStyle;
+    dismissalAnimationController.transitionStyle = NYAlertViewControllerTransitionStyleSlideFromTop;//self.transitionStyle;
     return dismissalAnimationController;
 }
 

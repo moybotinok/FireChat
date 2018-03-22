@@ -24,7 +24,11 @@ typedef NS_ENUM(NSInteger, NYAlertViewControllerTransitionStyle) {
     /** Slide the alert view from the top of the view */
     NYAlertViewControllerTransitionStyleSlideFromTop,
     /** Slide the alert view from the bottom of the view */
-    NYAlertViewControllerTransitionStyleSlideFromBottom
+    NYAlertViewControllerTransitionStyleSlideFromBottom,
+    /** Slide the alert view from the right of the view */
+    NYAlertViewControllerTransitionStyleSlideFromRight,
+    /** Slide the alert view from the left of the view */
+    NYAlertViewControllerTransitionStyleSlideFromLeft,
 };
 
 @interface NYAlertViewController : UIViewController
