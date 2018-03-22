@@ -19,7 +19,10 @@ class FCContactsVC: UIViewController {
 
     @IBAction func logoutButtonPressed(_ sender: UIBarButtonItem) {
         
-        dismiss(animated: true, completion: nil)
+        if FCFirebaseAuthService.sharedInstance.logOut() {
+            
+            dismiss(animated: true, completion: nil)
+        }
     }
     
 }

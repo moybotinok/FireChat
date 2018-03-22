@@ -39,7 +39,43 @@ class FCFirebaseAuthService {
                 loginHandler?(nil)
             }
         }
+    }
+    
+    func signUp(withEmail: String, password: String, loginHandler: LoginHandler?) {
         
+        Auth.auth().createUser(withEmail: withEmail, password: password) { (user, error) in
+            
+            if error != nil {
+                
+                self.handleErrors(error: error! as NSError, loginHandler: loginHandler)
+                
+            } else {
+                
+                if let userUID = user?.uid {
+                    
+                    FCFirebaseDatabaseService.sharedInstance.saveUser(withID: userUID, email: withEmail, password: password)
+                    
+                    self.login(withEmail: withEmail, password: password, loginHandler: loginHandler)
+                }
+            }
+        }
+    }
+    
+    func logOut() -> Bool {
+        
+        if let _ = Auth.auth().currentUser {
+            do {
+                
+                try Auth.auth().signOut()
+                return true
+                
+            } catch {
+                
+                return false
+            }
+        }
+        
+        return true
     }
     
     
@@ -78,8 +114,6 @@ class FCFirebaseAuthService {
     }
     
   
-    
-    
 }
 
 
