@@ -10,11 +10,16 @@ import Foundation
 import FirebaseDatabase
 import FirebaseStorage
 
+protocol FetchData: class {
+    func dataReceived(contacts: [Contact])
+}
 
 class FCFirebaseDatabaseService {
     
     static let sharedInstance = FCFirebaseDatabaseService()
     private init(){}
+    
+    weak var delegate: FetchData?
     
     var dbRef: DatabaseReference {
         return Database.database().reference()
@@ -55,7 +60,42 @@ class FCFirebaseDatabaseService {
     }
     
     
-    
+    func getContacts() {
+        
+        contactsRef.observeSingleEvent(of: .value) { [weak self] (snapshot) in
+            
+            var contacts = [Contact]()
+            
+            let userId = FCFirebaseAuthService.sharedInstance.userId() ?? ""
+            
+            if let databaseContacts = snapshot.value as? NSDictionary {
+                
+                for (key, value) in databaseContacts {
+                    
+                    if let contactData = value as? NSDictionary {
+                        
+                        if let email = contactData[Constants.EMAIL] as? String {
+                            
+                            let id = key as! String
+                            
+                            if (id != userId) {
+                                
+                                let newContact = Contact(id: id, name: email)
+                                contacts.append(newContact)
+                            }
+                        }
+                    }
+                }
+            }
+            
+            if let delegate = self?.delegate {
+                delegate.dataReceived(contacts: contacts)
+            }
+            
+        }
+        
+
+    }
     
     
     

@@ -18,6 +18,7 @@
 		EE72931B206469B400F408E2 /* veil.json in Resources */ = {isa = PBXBuildFile; fileRef = EE72931A206469B400F408E2 /* veil.json */; };
 		EE72931D20646B9900F408E2 /* anubis.json in Resources */ = {isa = PBXBuildFile; fileRef = EE72931C20646B9900F408E2 /* anubis.json */; };
 		EE72931F20646C1000F408E2 /* acrobatics.json in Resources */ = {isa = PBXBuildFile; fileRef = EE72931E20646C1000F408E2 /* acrobatics.json */; };
+		EE7293232065BF2600F408E2 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7293222065BF2600F408E2 /* Contact.swift */; };
 		EEAF638F206059E50046F135 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAF638E206059E50046F135 /* AppDelegate.swift */; };
 		EEAF6394206059E50046F135 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEAF6392206059E50046F135 /* Main.storyboard */; };
 		EEAF6396206059E50046F135 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEAF6395206059E50046F135 /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 		EE72931A206469B400F408E2 /* veil.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = veil.json; sourceTree = "<group>"; };
 		EE72931C20646B9900F408E2 /* anubis.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = anubis.json; sourceTree = "<group>"; };
 		EE72931E20646C1000F408E2 /* acrobatics.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = acrobatics.json; sourceTree = "<group>"; };
+		EE7293222065BF2600F408E2 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		EEAF638B206059E50046F135 /* FireChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FireChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEAF638E206059E50046F135 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEAF6393206059E50046F135 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 		EEAF63A2206061680046F135 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EE7293222065BF2600F408E2 /* Contact.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 			files = (
 				EE17146B2061D0F800C84DD6 /* FCFirebaseAuthService.swift in Sources */,
 				EE65FA25206323CA00EE2FDB /* NYAlertView.m in Sources */,
+				EE7293232065BF2600F408E2 /* Contact.swift in Sources */,
 				EE65FA2F2064672C00EE2FDB /* LottieHUD.swift in Sources */,
 				EE65FA2A2064581600EE2FDB /* FCFirebaseDatabaseService.swift in Sources */,
 				EEAF638F206059E50046F135 /* AppDelegate.swift in Sources */,

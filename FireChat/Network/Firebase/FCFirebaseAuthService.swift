@@ -61,9 +61,10 @@ class FCFirebaseAuthService {
         }
     }
     
+    
     func logOut() -> Bool {
         
-        if let _ = Auth.auth().currentUser {
+        if isLoggedIn() {
             do {
                 
                 try Auth.auth().signOut()
@@ -78,6 +79,20 @@ class FCFirebaseAuthService {
         return true
     }
     
+    func isLoggedIn() -> Bool {
+        
+        if let _ = Auth.auth().currentUser {
+            
+            return true
+        }
+        
+        return false
+    }
+    
+    func userId() -> String? {
+        
+        return Auth.auth().currentUser?.uid
+    }
     
     private func handleErrors(error: NSError, loginHandler: LoginHandler?) {
         

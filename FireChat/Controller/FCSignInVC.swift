@@ -39,10 +39,17 @@ class FCSignInVC: UIViewController {
         #endif
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        if FCFirebaseAuthService.sharedInstance.isLoggedIn() {
+            goToContacts()
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         let vc = segue.destination
-        vc.modalTransitionStyle = .partialCurl
+        vc.modalTransitionStyle = .flipHorizontal
     }
 
 
@@ -64,7 +71,7 @@ class FCSignInVC: UIViewController {
                     
                     self?.clearTextFields()
                     self?.dismissHUD()
-                    self?.performSegue(withIdentifier: (self?.CONTACTS_SEGUE)!, sender: nil)
+                    self?.goToContacts()
                 }
             })
         
@@ -92,7 +99,7 @@ class FCSignInVC: UIViewController {
                     
                     self?.clearTextFields()
                     self?.dismissHUD()
-                    self?.performSegue(withIdentifier: (self?.CONTACTS_SEGUE)!, sender: nil)
+                    self?.goToContacts()
                 }
             })
             
@@ -103,6 +110,12 @@ class FCSignInVC: UIViewController {
         }
     }
     
+    //MARK: - Private
+    
+    func goToContacts() {
+        
+        performSegue(withIdentifier: CONTACTS_SEGUE, sender: nil)
+    }
 
     @objc private func cantLogin() {
         
@@ -134,7 +147,6 @@ class FCSignInVC: UIViewController {
 
     @objc func dismissHUD() {
 
-        print("dismissHUD")
         loginHud.stopHUD()
         signUpHud.stopHUD()
     }
