@@ -163,11 +163,11 @@
 		EEAF638D206059E50046F135 /* FireChat */ = {
 			isa = PBXGroup;
 			children = (
+				EEAF6392206059E50046F135 /* Main.storyboard */,
 				EE65FA2B20645B6200EE2FDB /* Constants.swift */,
+				EEAF63A1206060B80046F135 /* AppDelegate */,
 				EE65FA272064575400EE2FDB /* Database */,
 				EE1714682061D0AD00C84DD6 /* Network */,
-				EEAF63A1206060B80046F135 /* AppDelegate */,
-				EEAF6392206059E50046F135 /* Main.storyboard */,
 				EEAF63A4206061A00046F135 /* Controller */,
 				EEAF63A3206061770046F135 /* View */,
 				EEAF63A2206061680046F135 /* Model */,
@@ -315,6 +315,8 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-FireChat/Pods-FireChat-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -323,6 +325,8 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -526,6 +530,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 68G4LPYNS6;
 				INFOPLIST_FILE = "$(SRCROOT)/Supporting/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tany.FireChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -545,6 +550,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 68G4LPYNS6;
 				INFOPLIST_FILE = "$(SRCROOT)/Supporting/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tany.FireChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";

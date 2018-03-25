@@ -15,5 +15,7 @@ target 'FireChat' do
     pod 'Firebase/Auth'
     
     pod 'lottie-ios'
+    
+    pod 'JSQMessagesViewController'
 
 end
