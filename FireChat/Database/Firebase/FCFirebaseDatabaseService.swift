@@ -19,6 +19,8 @@ class FCFirebaseDatabaseService {
     static let sharedInstance = FCFirebaseDatabaseService()
     private init(){}
     
+    var userName = ""
+    
     weak var delegate: FetchData?
     
     var dbRef: DatabaseReference {
@@ -78,11 +80,17 @@ class FCFirebaseDatabaseService {
                             
                             let id = key as! String
                             
+                            let newContact = Contact(id: id, name: email)
+                            
                             if (id != userId) {
-                                
-                                let newContact = Contact(id: id, name: email)
+                            
                                 contacts.append(newContact)
+                                
+                            } else {
+                                
+                                self?.userName = newContact.name
                             }
+                            
                         }
                     }
                 }
@@ -97,13 +105,4 @@ class FCFirebaseDatabaseService {
 
     }
     
-    
-    
-//    service firebase.storage {
-//    match /b/{bucket}/o {
-//    match /{allPaths=**} {
-//    allow read, write: if request.auth != null;
-//    }
-//    }
-//    }
 }

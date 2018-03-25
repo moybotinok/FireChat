@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8CE0936EB06937E16A7EA898 /* Pods_FireChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E92E70E815E9743183373674 /* Pods_FireChat.framework */; };
 		EE06C7142065D3E200D90B20 /* FCChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE06C7132065D3E200D90B20 /* FCChatVC.swift */; };
+		EE1640152067F47900A995FF /* FCMessagesHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1640142067F47900A995FF /* FCMessagesHandler.swift */; };
 		EE1714672061B5B700C84DD6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE1714662061B5B700C84DD6 /* GoogleService-Info.plist */; };
 		EE17146B2061D0F800C84DD6 /* FCFirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE17146A2061D0F800C84DD6 /* FCFirebaseAuthService.swift */; };
 		EE65FA25206323CA00EE2FDB /* NYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE65FA22206323CA00EE2FDB /* NYAlertView.m */; };
@@ -33,6 +34,7 @@
 		DB515A6DD1129DE0747749F4 /* Pods-FireChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FireChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-FireChat/Pods-FireChat.release.xcconfig"; sourceTree = "<group>"; };
 		E92E70E815E9743183373674 /* Pods_FireChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FireChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE06C7132065D3E200D90B20 /* FCChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCChatVC.swift; sourceTree = "<group>"; };
+		EE1640142067F47900A995FF /* FCMessagesHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMessagesHandler.swift; sourceTree = "<group>"; };
 		EE1714662061B5B700C84DD6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EE17146A2061D0F800C84DD6 /* FCFirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCFirebaseAuthService.swift; sourceTree = "<group>"; };
 		EE65FA21206323CA00EE2FDB /* NYAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYAlertViewController.h; sourceTree = "<group>"; };
@@ -84,6 +86,48 @@
 				E92E70E815E9743183373674 /* Pods_FireChat.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EE1640132067F43E00A995FF /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				EE1640142067F47900A995FF /* FCMessagesHandler.swift */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
+		EE1640162067F48C00A995FF /* Userstory */ = {
+			isa = PBXGroup;
+			children = (
+				EE1640172067F50C00A995FF /* SignIn */,
+				EE1640182067F52400A995FF /* Contacts */,
+				EE1640192067F53600A995FF /* Chat */,
+			);
+			path = Userstory;
+			sourceTree = "<group>";
+		};
+		EE1640172067F50C00A995FF /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				EEAF63AB206064F90046F135 /* FCSignInVC.swift */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		EE1640182067F52400A995FF /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				EEAF63A9206064E00046F135 /* FCContactsVC.swift */,
+			);
+			path = Contacts;
+			sourceTree = "<group>";
+		};
+		EE1640192067F53600A995FF /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				EE06C7132065D3E200D90B20 /* FCChatVC.swift */,
+			);
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		EE1714682061D0AD00C84DD6 /* Network */ = {
@@ -166,11 +210,11 @@
 				EEAF6392206059E50046F135 /* Main.storyboard */,
 				EE65FA2B20645B6200EE2FDB /* Constants.swift */,
 				EEAF63A1206060B80046F135 /* AppDelegate */,
-				EE65FA272064575400EE2FDB /* Database */,
 				EE1714682061D0AD00C84DD6 /* Network */,
-				EEAF63A4206061A00046F135 /* Controller */,
-				EEAF63A3206061770046F135 /* View */,
+				EE65FA272064575400EE2FDB /* Database */,
+				EE1640132067F43E00A995FF /* Messages */,
 				EEAF63A2206061680046F135 /* Model */,
+				EE1640162067F48C00A995FF /* Userstory */,
 			);
 			path = FireChat;
 			sourceTree = "<group>";
@@ -201,23 +245,6 @@
 				EE7293222065BF2600F408E2 /* Contact.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		EEAF63A3206061770046F135 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		EEAF63A4206061A00046F135 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				EEAF63AB206064F90046F135 /* FCSignInVC.swift */,
-				EEAF63A9206064E00046F135 /* FCContactsVC.swift */,
-				EE06C7132065D3E200D90B20 /* FCChatVC.swift */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		EEB67B7B20630FB70008733C /* Libraries */ = {
@@ -382,6 +409,7 @@
 				EE65FA2F2064672C00EE2FDB /* LottieHUD.swift in Sources */,
 				EE65FA2A2064581600EE2FDB /* FCFirebaseDatabaseService.swift in Sources */,
 				EE06C7142065D3E200D90B20 /* FCChatVC.swift in Sources */,
+				EE1640152067F47900A995FF /* FCMessagesHandler.swift in Sources */,
 				EEAF638F206059E50046F135 /* AppDelegate.swift in Sources */,
 				EEAF63AC206064F90046F135 /* FCSignInVC.swift in Sources */,
 				EE65FA26206323CA00EE2FDB /* NYAlertViewController.m in Sources */,
@@ -460,7 +488,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -512,7 +540,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Supporting/$(PROJECT_NAME)-Bridging-Header.h";
@@ -530,7 +558,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 68G4LPYNS6;
 				INFOPLIST_FILE = "$(SRCROOT)/Supporting/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tany.FireChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -550,7 +578,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 68G4LPYNS6;
 				INFOPLIST_FILE = "$(SRCROOT)/Supporting/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tany.FireChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";

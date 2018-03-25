@@ -11,7 +11,8 @@ import JSQMessagesViewController
 import MobileCoreServices
 import AVKit
 
-class FCChatVC: JSQMessagesViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+class FCChatVC: JSQMessagesViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, FCMessageRecievedDelegate {
 
     private var messages = [JSQMessage]()
     
@@ -20,9 +21,25 @@ class FCChatVC: JSQMessagesViewController, UIImagePickerControllerDelegate, UINa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.picker.delegate = self
-        self.senderId = "1"
-        self.senderDisplayName = "tany"
+        picker.delegate = self
+        FCMessagesHandler.sharedInstance.delegate = self
+        
+        self.senderId = FCFirebaseAuthService.sharedInstance.userId()
+        self.senderDisplayName = FCFirebaseDatabaseService.sharedInstance.userName
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        FCMessagesHandler.sharedInstance.observeMessages()
+        FCMessagesHandler.sharedInstance.observeMediaMessages()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        FCMessagesHandler.sharedInstance.stopObserve()
     }
 
 
@@ -46,8 +63,18 @@ class FCChatVC: JSQMessagesViewController, UIImagePickerControllerDelegate, UINa
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
         
+        let message = messages[indexPath.item]
+        
         let bubbleFactory = JSQMessagesBubbleImageFactory()
-        return bubbleFactory?.outgoingMessagesBubbleImage(with: UIColor.green)
+        
+        if (message.senderId == senderId) {
+        
+            return bubbleFactory?.outgoingMessagesBubbleImage(with: UIColor.green)
+            
+        } else {
+            
+            return bubbleFactory?.incomingMessagesBubbleImage(with: UIColor.blue)
+        }
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
@@ -72,16 +99,59 @@ class FCChatVC: JSQMessagesViewController, UIImagePickerControllerDelegate, UINa
                 present(playerVC, animated: true, completion: nil)
             }
         }
+    }
+    
+    //MARK: - FCMessageRecievedDelegate
+    
+    func messageRecieved(senderId: String, senderName: String, text: String) {
+
+        messages.append(JSQMessage(senderId: senderId, displayName: senderName, text: text))
+        collectionView.reloadData()
+        scrollToBottom(animated: true)
+    }
+    
+    func mediaRecieved(senderId: String, senderName: String, url: String) {
         
+        if let mediaURL = URL(string: url) {
+            
+            if url.contains("/\(Constants.IMAGE_STORAGE)") {
+                
+                URLSession.shared.dataTask(with: mediaURL) { [weak self] data, response, error in
+                    
+                    if let image = UIImage(data: data!) {
+                        
+                        DispatchQueue.main.async {
+                            
+                            let photo = JSQPhotoMediaItem(image: image)
+                            
+                            photo?.appliesMediaViewMaskAsOutgoing = (senderId == self?.senderId)
+
+                            self?.messages.append(JSQMessage(senderId: senderId, displayName: senderName, media: photo))
+                            
+                            self?.collectionView.reloadData()
+                            self?.scrollToBottom(animated: true)
+                        }
+                    }
+                    }.resume()
+                
+            } else if url.contains("/\(Constants.VIDEO_STORAGE)") {
+                
+                let video = JSQVideoMediaItem(fileURL: mediaURL, isReadyToPlay: true)
+                video?.appliesMediaViewMaskAsOutgoing = (senderId == self.senderId)
+                self.messages.append(JSQMessage(senderId: senderId, displayName: senderName, media: video))
+                
+                self.collectionView.reloadData()
+                scrollToBottom(animated: true)
+            }
+        }
     }
     
     // MARK: - Actions
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
         
-        messages.append(JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, text: text))
+        FCMessagesHandler.sharedInstance.sendMessage(senderID: senderId, senderName: senderDisplayName, text: text)
         
-        collectionView.reloadData()
         finishSendingMessage()
     }
     
@@ -118,33 +188,23 @@ class FCChatVC: JSQMessagesViewController, UIImagePickerControllerDelegate, UINa
         present(picker, animated: true, completion: nil)
     }
     
+    
     //MARK: - UIImagePickerControllerDelegate
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let photo = info[UIImagePickerControllerOriginalImage] as? UIImage {
             
-            let image = JSQPhotoMediaItem(image: photo)
-            self.messages.append(JSQMessage(senderId: senderId, displayName: senderDisplayName, media: image))
-            
+            let data = UIImageJPEGRepresentation(photo, 0.01)
+            FCMessagesHandler.sharedInstance.sendMedia(image: data, video: nil, senderId: senderId, senderName: senderDisplayName)
             
         } else if let videoURL = info[UIImagePickerControllerMediaURL] as? URL {
-            
-            let video = JSQVideoMediaItem(fileURL: videoURL, isReadyToPlay: true)
-            self.messages.append(JSQMessage(senderId: senderId, displayName: senderDisplayName, media: video))
-            collectionView.reloadData()
-            
+
+            FCMessagesHandler.sharedInstance.sendMedia(image: nil, video: videoURL, senderId: senderId, senderName: senderDisplayName)
         }
         
-        
-        collectionView.reloadData()
         picker.dismiss(animated: true, completion: nil)
-        
     }
-    
-    
-    
-    
     
     
 }

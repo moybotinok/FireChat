@@ -25,7 +25,6 @@ class FCFirebaseAuthService {
     static let sharedInstance = FCFirebaseAuthService()
     private init(){}
     
-    
     func login(withEmail: String, password: String, loginHandler: LoginHandler?) {
         
         Auth.auth().signIn(withEmail: withEmail, password: password) { (user, error) in
