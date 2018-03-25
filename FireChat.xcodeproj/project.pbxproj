@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8CE0936EB06937E16A7EA898 /* Pods_FireChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E92E70E815E9743183373674 /* Pods_FireChat.framework */; };
+		EE06C7142065D3E200D90B20 /* FCChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE06C7132065D3E200D90B20 /* FCChatVC.swift */; };
 		EE1714672061B5B700C84DD6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE1714662061B5B700C84DD6 /* GoogleService-Info.plist */; };
 		EE17146B2061D0F800C84DD6 /* FCFirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE17146A2061D0F800C84DD6 /* FCFirebaseAuthService.swift */; };
 		EE65FA25206323CA00EE2FDB /* NYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE65FA22206323CA00EE2FDB /* NYAlertView.m */; };
@@ -31,6 +32,7 @@
 		4961E299F31FB6E95A32F753 /* Pods-FireChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FireChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FireChat/Pods-FireChat.debug.xcconfig"; sourceTree = "<group>"; };
 		DB515A6DD1129DE0747749F4 /* Pods-FireChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FireChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-FireChat/Pods-FireChat.release.xcconfig"; sourceTree = "<group>"; };
 		E92E70E815E9743183373674 /* Pods_FireChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FireChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE06C7132065D3E200D90B20 /* FCChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCChatVC.swift; sourceTree = "<group>"; };
 		EE1714662061B5B700C84DD6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EE17146A2061D0F800C84DD6 /* FCFirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCFirebaseAuthService.swift; sourceTree = "<group>"; };
 		EE65FA21206323CA00EE2FDB /* NYAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYAlertViewController.h; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 			children = (
 				EEAF63AB206064F90046F135 /* FCSignInVC.swift */,
 				EEAF63A9206064E00046F135 /* FCContactsVC.swift */,
+				EE06C7132065D3E200D90B20 /* FCChatVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				EE7293232065BF2600F408E2 /* Contact.swift in Sources */,
 				EE65FA2F2064672C00EE2FDB /* LottieHUD.swift in Sources */,
 				EE65FA2A2064581600EE2FDB /* FCFirebaseDatabaseService.swift in Sources */,
+				EE06C7142065D3E200D90B20 /* FCChatVC.swift in Sources */,
 				EEAF638F206059E50046F135 /* AppDelegate.swift in Sources */,
 				EEAF63AC206064F90046F135 /* FCSignInVC.swift in Sources */,
 				EE65FA26206323CA00EE2FDB /* NYAlertViewController.m in Sources */,

@@ -11,6 +11,7 @@ import UIKit
 class FCContactsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, FetchData {
 
     private let CELL_IDENTIFIER = "Cell"
+    private let CHAT_SEGUE = "ChatSegue"
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -61,6 +62,7 @@ class FCContactsVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        performSegue(withIdentifier: CHAT_SEGUE, sender: nil)
     }
     
     //MARK: - Actions

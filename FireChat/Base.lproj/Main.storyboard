@@ -77,14 +77,14 @@
                     <connections>
                         <outlet property="emailTextField" destination="9yZ-ji-t87" id="6aZ-ra-LEs"/>
                         <outlet property="passwordTextField" destination="y5h-31-ASj" id="aHA-jX-v6S"/>
-                        <segue destination="ARy-mo-V5h" kind="show" identifier="ContactsSegue" id="0fg-SI-Pic"/>
+                        <segue destination="0wU-UD-vF3" kind="show" identifier="ContactsSegue" id="0fg-SI-Pic"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="375.19999999999999" y="33.990147783251231"/>
         </scene>
-        <!--ContactsVC-->
+        <!--Контакты-->
         <scene sceneID="gpE-R2-48P">
             <objects>
                 <viewController id="ARy-mo-V5h" customClass="FCContactsVC" customModule="FireChat" sceneMemberID="viewController">
@@ -92,24 +92,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FdS-bB-idb">
-                                <rect key="frame" x="0.0" y="44" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="Contacts" id="46x-Iv-NRh">
-                                        <barButtonItem key="leftBarButtonItem" title="Logout" id="bCJ-9A-yRE">
-                                            <connections>
-                                                <action selector="logoutButtonPressed:" destination="ARy-mo-V5h" id="73O-E1-zx2"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kg0-KS-YEm">
                                 <rect key="frame" x="0.0" y="88" width="375" height="690"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="jIC-Rm-23f">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="jIC-Rm-23f">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jIC-Rm-23f" id="u6N-Oc-Acd">
@@ -122,23 +110,65 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="FdS-bB-idb" firstAttribute="top" secondItem="rNh-Bg-c49" secondAttribute="top" id="5WX-xG-S6c"/>
-                            <constraint firstItem="FdS-bB-idb" firstAttribute="leading" secondItem="rNh-Bg-c49" secondAttribute="leading" id="9GM-vA-lr8"/>
-                            <constraint firstItem="FdS-bB-idb" firstAttribute="trailing" secondItem="rNh-Bg-c49" secondAttribute="trailing" id="N8h-yu-cjv"/>
-                            <constraint firstItem="kg0-KS-YEm" firstAttribute="top" secondItem="FdS-bB-idb" secondAttribute="bottom" id="cEk-GL-PhF"/>
                             <constraint firstItem="kg0-KS-YEm" firstAttribute="leading" secondItem="rNh-Bg-c49" secondAttribute="leading" id="cNQ-Qr-aZ0"/>
                             <constraint firstItem="rNh-Bg-c49" firstAttribute="bottom" secondItem="kg0-KS-YEm" secondAttribute="bottom" id="hWf-kQ-RJq"/>
+                            <constraint firstItem="kg0-KS-YEm" firstAttribute="top" secondItem="rNh-Bg-c49" secondAttribute="top" id="tqQ-XU-FDz"/>
                             <constraint firstItem="rNh-Bg-c49" firstAttribute="trailing" secondItem="kg0-KS-YEm" secondAttribute="trailing" id="yhb-CG-hM2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rNh-Bg-c49"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Контакты" id="Yd0-WZ-Ucv">
+                        <barButtonItem key="leftBarButtonItem" title="Выйти" id="bCJ-9A-yRE">
+                            <connections>
+                                <action selector="logoutButtonPressed:" destination="ARy-mo-V5h" id="73O-E1-zx2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="kg0-KS-YEm" id="L9N-fc-Zpg"/>
+                        <segue destination="ufK-G4-b25" kind="show" identifier="ChatSegue" id="VbR-BB-RXl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YKI-h4-ja0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1194" y="34"/>
+            <point key="canvasLocation" x="1974" y="34"/>
+        </scene>
+        <!--Чат-->
+        <scene sceneID="p0i-CK-out">
+            <objects>
+                <viewController id="ufK-G4-b25" customClass="FCChatVC" customModule="FireChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RBE-ID-isK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="ovR-2j-YSx"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Чат" id="67h-ee-4wC"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xv0-6q-Gb9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2718" y="34"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ufj-Nv-Y1q">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0wU-UD-vF3" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FR4-m5-9CQ">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PAE-37-d7R">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="ARy-mo-V5h" kind="relationship" relationship="rootViewController" id="4cv-uZ-qVC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LFO-L5-t95" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1193.5999999999999" y="33.990147783251231"/>
         </scene>
     </scenes>
     <resources>
